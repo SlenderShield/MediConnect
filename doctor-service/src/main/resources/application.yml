@@ -1,0 +1,35 @@
+spring:
+    application:
+        name: doctor-service
+
+    boot:
+        admin:
+            client:
+                enabled: true
+                instance:
+                    name: Doctor Service
+                    service-url: http://doctor-service:8080
+                url: http://admin-service:8080
+                auto-registration: true
+
+    data:
+        mongodb:
+            uri: ${MONGO_URI}
+
+logging:
+    level:
+        org:
+            springframework:
+                web: DEBUG
+                servlet: DEBUG
+
+management:
+    endpoints:
+        web:
+            exposure:
+                include: "*"
+            enable:
+                include: health
+
+server:
+    port: 8080

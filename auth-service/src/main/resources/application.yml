@@ -1,0 +1,37 @@
+spring:
+  application:
+    name: auth-service
+
+  boot:
+    admin:
+      client:
+        enabled: true
+        instance:
+          name: Auth Service
+          service-url: http://auth-service:8080
+        url: http://admin-service:8080
+        auto-registration: true
+
+  data:
+    mongodb:
+      uri: ${MONGO_URI}
+
+logging:
+  level:
+    org.springframework.web: DEBUG
+    org.springframework.servlet: DEBUG
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+      enable:
+        include: health
+
+server:
+  port: 8080
+
+jwt:
+  secret: ${JWT_SECRET}
+  expiration: 86400000

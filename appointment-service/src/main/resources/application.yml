@@ -1,0 +1,62 @@
+app:
+    environment: prod
+
+spring:
+    application:
+        name: appointment-service
+
+    boot:
+        admin:
+            client:
+                enabled: true
+                instance:
+                    name: Appointment Service
+                    service-url: http://appointment-service:8080
+                url: http://admin-service:8080
+                auto-registration: true
+
+    data:
+        mongodb:
+            uri: ${MONGO_URI}
+
+    kafka:
+        producer:
+            bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVER}
+            key-serializer: org.apache.kafka.common.serialization.StringSerializer
+            value-serializer: org.apache.kafka.common.serialization.StringSerializer
+
+        topic:
+            name: ${KAFKA_TOPIC}
+
+logging:
+    level:
+        org:
+            springframework:
+                web: DEBUG
+                servlet: DEBUG
+            apache:
+                kafka:
+                    clients:
+                        producer: DEBUG
+
+management:
+    endpoints:
+        web:
+            exposure:
+                include: "*"
+            enable:
+                include: health
+
+server:
+    port: ${APPOINTMENT_SERVICE_PORT:8080}
+
+doctor:
+    service:
+        url: http://doctor-service:8080/api/v1/doctor
+
+patient:
+    service:
+        url: http://patient-service:8080/api/v1/patient
+    data:
+        mongodb:
+            uri: ${MONGO_URI}

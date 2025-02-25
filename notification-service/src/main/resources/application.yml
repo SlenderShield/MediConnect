@@ -1,0 +1,47 @@
+spring:
+  application:
+    name: notification-service
+
+  boot:
+    admin:
+      client:
+        enabled: true
+        instance:
+          name: Notification Service
+          service-url: http://notification-service:8080
+        url: http://admin-service:8080
+        auto-registration: true
+
+  kafka:
+    consumer:
+      bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVER}
+      group-id: mygroupid
+      auto-offset-reset: latest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+
+    topic:
+      name: ${KAFKA_TOPIC}
+
+  mail:
+    host: ${MAIL_SERVER_HOST}
+    port: ${MAIL_SERVER_PORT}
+    username: ${MAIL_SERVER_USERNAME}
+    password: ${MAIL_SERVER_PASSWORD}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+      enable:
+        include: health
+
+server:
+  port: 8080

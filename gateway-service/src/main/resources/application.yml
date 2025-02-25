@@ -1,0 +1,51 @@
+spring:
+  cloud:
+    gateway:
+      globalcors:
+        corsConfigurations:
+          '[/**]': # Apply to all routes
+            allowedOrigins:
+              - http://localhost:9090 # Your React frontend
+              - http://localhost:5173
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+              - OPTIONS
+            allowedHeaders: "*"
+            allowCredentials: true
+
+  application:
+    name: gateway-service
+
+  boot:
+    admin:
+      client:
+        enabled: true
+        instance:
+          name: Gateway Service
+          service-url: http://gateway-service:8080
+        url: http://admin-service:8080
+        auto-registration: true
+
+  main:
+    web-application-type: reactive
+
+  logging:
+    level:
+      org.springframework.cloud.gateway: DEBUG
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+      enable:
+        include: health
+
+server:
+  port: ${GATEWAY_SERVICE_PORT}
+
+jwt:
+  secret: ${JWT_SECRET}

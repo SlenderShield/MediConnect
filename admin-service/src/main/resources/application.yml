@@ -1,0 +1,21 @@
+# Server configuration
+server:
+  port: 8080
+
+# Spring Boot Admin Configuration
+spring:
+  application:
+    name: admin-service
+  boot:
+    admin:
+      server:
+        enabled: true
+        ui:
+          title: Healthcare Admin Panel
+        context-path: /
+      monitor:
+        default-retries: 2
+        status-interval: 10000
+        status-lifetime: 10000
+      routes:
+        endpoints: info

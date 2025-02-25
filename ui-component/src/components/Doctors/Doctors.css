@@ -1,0 +1,9 @@
+.yoe-wrapper {
+  height: 2rem;
+  width: 2rem;
+  border: 1px solid blue;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
