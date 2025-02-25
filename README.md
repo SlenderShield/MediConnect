@@ -115,5 +115,4 @@ docker-compose down
 ---
 
 ## License
-
-This project is for educational purposes and self-learning only. It is available only for paid users of HungryCoders course users.
+MIT License
